@@ -106,12 +106,12 @@ func (scanner *Scanner) Scan(target zgrab2.ScanTarget) (zgrab2.ScanStatus, inter
 	if _, err := conn.Write([]byte("\x4a\x52\x4d\x49\x00\x02\x4b")); err != nil {
 		return zgrab2.SCAN_CONNECTION_CLOSED, "", err
 	}
-	ret := make([]byte, 3)
+	ret := make([]byte, 1)
     _, err = conn.Read(ret)
     if err != nil {
 		return zgrab2.SCAN_CONNECTION_CLOSED, "", err
     }
-    if bytes.Equal([]byte("\x4e\x00\x09"), ret) {
+    if bytes.Equal([]byte("\x4e"), ret) {
         result.ret = true
     } else {
 		return zgrab2.SCAN_CONNECTION_CLOSED, "", err
